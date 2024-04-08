@@ -13,11 +13,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Дарья\\OneDrive\\Рабочий стол\\test\\2labs\\2labs.csproj",
+      "projectUniqueName": "C:\\Users\\Дарья\\OneDrive\\Рабочий стол\\tech_prog\\2labs\\2labs.csproj",
       "projectName": "2labs",
-      "projectPath": "C:\\Users\\Дарья\\OneDrive\\Рабочий стол\\test\\2labs\\2labs.csproj",
+      "projectPath": "C:\\Users\\Дарья\\OneDrive\\Рабочий стол\\tech_prog\\2labs\\2labs.csproj",
       "packagesPath": "C:\\Users\\Дарья\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Дарья\\OneDrive\\Рабочий стол\\test\\2labs\\obj\\",
+      "outputPath": "C:\\Users\\Дарья\\OneDrive\\Рабочий стол\\tech_prog\\2labs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Дарья\\AppData\\Roaming\\NuGet\\NuGet.Config"
