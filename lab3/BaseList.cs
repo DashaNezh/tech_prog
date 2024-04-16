@@ -19,6 +19,27 @@ public class BadFileException : Exception
 
 public abstract class BaseList<T> where T : IComparable<T>
 {
+    public int CompareTo(BaseList<T> other)
+    {
+        // Сначала сравниваем количество элементов в списках
+        if (Count != other.Count)
+        {
+            return Count.CompareTo(other.Count);
+        }
+
+        // Затем сравниваем каждый элемент поочередно
+        for (int i = 0; i < Count; i++)
+        {
+            int comparisonResult = this[i].CompareTo(other[i]);
+            if (comparisonResult != 0)
+            {
+                return comparisonResult;
+            }
+        }
+
+        // Если все элементы равны, возвращаем ноль
+        return 0;
+    }
     public event ChangeEventHandler Change;
     private int changeCount = 0;
 
