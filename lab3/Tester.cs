@@ -12,7 +12,7 @@ private static int chainBadFileExceptionCount = 0;
 
         for (int i = 0; i < 10000; i++)
         {
-            int operation = random.Next(7); //выбор операции
+            int operation = random.Next(5); //выбор операции
             string value = "Value" + random.Next(1000); // случ. знач.
             int index = random.Next(1, 100); // случ. индекс
 
@@ -25,35 +25,18 @@ private static int chainBadFileExceptionCount = 0;
                         list2.Add(value);
                         break;
                     case 1:
-                        if(list1.Count > 0 && list2.Count > 0)
-                        {
-                            list1.Insert(index, value);
-                            list2.Insert(index, value);
-                        }
+                        list1.Insert(index, value);
+                        list2.Insert(index, value);
                         break;
                     case 2:
-                        if (list1.Count > 0 && list2.Count > 0)
-                        {
-                            list1.Delete(index);
-                            list2.Delete(index);
-                        }
+                        list1.Delete(index);
+                        list2.Delete(index);
                         break;
                     case 3:
-                        //list1.Clear();
-                        //list2.Clear();
+                        list1.Clear();
+                        list2.Clear();
                         break;
                     case 4:
-                        if(list1.Count > 0 && list2.Count > 0)
-                        {
-                            list1[index] = value;
-                            list2[index] = value;
-                        }
-                        break;
-                    case 5:
-                        list1.Sort();
-                        list2.Sort();
-                        break;
-                    case 6:
                         list1.LoadFromFile("fileForTest.txt");
                         list2.LoadFromFile("fileForTest.txt");
                         break;
@@ -64,12 +47,8 @@ private static int chainBadFileExceptionCount = 0;
                 Console.WriteLine($"Ошибка: {e.Message}");
                 CountExceptions(list1, e);
                 CountExceptions(list2, e);
-                break;
             }
         }
-        //list1.Assign(list2);
-        //list1.AssignTo(list2); 
-        //list2 = list1.Clone();
         Console.WriteLine(list1.Count);
         Console.WriteLine(list2.Count);
         bool testEquals = list1.Equals(list2);
