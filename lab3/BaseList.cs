@@ -7,16 +7,28 @@ public delegate void ChangeEventHandler(object sender, EventArgs e);
 // Исключение для случаев некорректного индекса
 public class BadIndexException : Exception
 {
+    private static int exceptCount = 0;
     public BadIndexException(string message) : base(message)
     {
+        exceptCount++;
+    }
+    public static int GetExceptCount()
+    {
+        return exceptCount;
     }
 }
 
 // Исключение для случаев проблем с файлом
 public class BadFileException : Exception
 {
+    private static int exceptCount = 0;
     public BadFileException(string message) : base(message)
     {
+        exceptCount++;
+    }
+    public static int GetExceptCount()
+    {
+        return exceptCount;
     }
 }
 public abstract class BaseList<T> where T : IComparable<T>

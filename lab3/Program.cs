@@ -224,7 +224,7 @@ class Program
         Console.WriteLine("Список строк после сортировки:");
         stringsList.Print();
 
-        // Console.WriteLine("*** ВЫЗОВ МЕТОДА ТЕСТИРОВКИ ***");
-        // TestPerformance();
+        Console.WriteLine("*** ВЫЗОВ МЕТОДА ТЕСТИРОВКИ ***");
+        Tester.Test();
     }
 }    

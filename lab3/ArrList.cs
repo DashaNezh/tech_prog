@@ -5,7 +5,6 @@ public class ArrList<T> : BaseList<T> where T : IComparable<T>
     private T[] buf; // массив для хранения элементов 
     // private int count;
     // Переопределение свойства для получения количества элементов в списке
-    private int CountBadIndexException = 0;
 
     public ArrList()
     {
@@ -37,7 +36,6 @@ public class ArrList<T> : BaseList<T> where T : IComparable<T>
         if (pos < 0 || pos > count)
         {
             throw new BadIndexException("Pos is out of range"); // позиция вне диапазона списка
-            CountBadIndexException++;
         }
         if (buf.Length <= count)  //проверка заполности буфера
         {
@@ -66,7 +64,6 @@ public class ArrList<T> : BaseList<T> where T : IComparable<T>
         if (pos < 0 || pos >= count)
         {
             throw new BadIndexException("Pos is out of range"); //проверка позиции
-            CountBadIndexException++;
         }
         //сдвигаем элементы влево для удаления
         for (int i = pos; i < count - 1; i++)
@@ -94,7 +91,6 @@ public class ArrList<T> : BaseList<T> where T : IComparable<T>
             if (i >= count || i < 0)
             {
                 throw new BadIndexException("Element is out of range");
-                CountBadIndexException++;
             }
             return buf[i]; //возращаем элемент списка по указанному индексу
         }
@@ -106,7 +102,6 @@ public class ArrList<T> : BaseList<T> where T : IComparable<T>
                 //throw new ArgumentOutOfRangeException("Element is out of range");
                 //retutn;
                 throw new BadIndexException("Element is out of range");
-                CountBadIndexException++;
             }
             buf[i] = value; //присваиваем новое значение элементу списка по указанному индексу
             OnChange(EventArgs.Empty);
