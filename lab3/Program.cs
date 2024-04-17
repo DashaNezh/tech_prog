@@ -3,77 +3,77 @@ class Program
 {
     static void Main(string[] args)
     {
-        BaseList<string> dynamicList = new ArrList<string>();
-        BaseList<string> linkedList = new ChainList<string>();
+        BaseList<string> arrList = new ArrList<string>();
+        BaseList<string> chainList = new ChainList<string>();
 
         // Добавление элементов
         Console.WriteLine("*** ТЕСТИРОВКА ADD*** \n");
-        dynamicList.Add("apple");
-        dynamicList.Add("banana");
-        dynamicList.Add("orange");
+        arrList.Add("apple");
+        arrList.Add("banana");
+        arrList.Add("orange");
 
-        linkedList.Add("apple");
-        linkedList.Add("banana");
-        linkedList.Add("orange");
+        chainList.Add("apple");
+        chainList.Add("banana");
+        chainList.Add("orange");
 
-        Console.WriteLine("Список DynamicList после добавления элементов:");
-        dynamicList.Print();
-        Console.WriteLine("Список LinkedList после добавления элементов:");
-        linkedList.Print();
+        Console.WriteLine("Список ArrList после добавления элементов:");
+        arrList.Print();
+        Console.WriteLine("Список ChainList после добавления элементов:");
+        chainList.Print();
         Console.WriteLine();
 
         // Вставка элемента
         Console.WriteLine("*** ТЕСТИРОВКА Insert***\n");
-        dynamicList.Insert(1, "grape");
-        linkedList.Insert(1, "grape");
+        arrList.Insert(1, "grape");
+        chainList.Insert(1, "grape");
 
-        Console.WriteLine("Список DynamicList после вставки элемента:");
-        dynamicList.Print();
-        Console.WriteLine("Список LinkedList после вставки элемента:");
-        linkedList.Print();
+        Console.WriteLine("Список ArrList после вставки элемента:");
+        arrList.Print();
+        Console.WriteLine("Список ChainList после вставки элемента:");
+        chainList.Print();
         Console.WriteLine();
 
         // Удаление элемента
          Console.WriteLine("*** ТЕСТИРОВКА Delete***\n");
-        dynamicList.Delete(2);
-        linkedList.Delete(2);
+        arrList.Delete(2);
+        chainList.Delete(2);
 
-        Console.WriteLine("Список DynamicList после удаления элемента:");
-        dynamicList.Print();
-        Console.WriteLine("Список LinkedList после удаления элемента:");
-        linkedList.Print();
+        Console.WriteLine("Список ArrList после удаления элемента:");
+        arrList.Print();
+        Console.WriteLine("Список ChainList после удаления элемента:");
+        chainList.Print();
         Console.WriteLine();
 
         // Очистка списков
-         Console.WriteLine("*** ТЕСТИРОВКА Clear***\n");
-        dynamicList.Clear();
-        linkedList.Clear();
+        Console.WriteLine("*** ТЕСТИРОВКА Clear***\n");
+        arrList.Clear();
+        chainList.Clear();
 
-        Console.WriteLine("Список DynamicList после очистки:");
-        dynamicList.Print();
-        Console.WriteLine("Список LinkedList после очистки:");
-        linkedList.Print();
+        Console.WriteLine("Список ArrList после очистки:");
+        arrList.Print();
+        Console.WriteLine("Список ChainList после очистки:");
+        chainList.Print();
         Console.WriteLine();
 
         // Проверка на равенство списков
-        Console.WriteLine("*** ТЕСТИРОВКА IsEqual***\n");
-        dynamicList.Add("apple");
-        dynamicList.Add("banana");
-        dynamicList.Add("orange");
+        Console.WriteLine("*** ТЕСТИРОВКА Equals***\n");
+        arrList.Add("apple");
+        arrList.Add("banana");
+        arrList.Add("orange");
 
-        linkedList.Add("apple");
-        linkedList.Add("banana");
-        linkedList.Add("orange");
+        chainList.Add("apple");
+        chainList.Add("banana");
+        chainList.Add("orange");
 
-        bool areListsEqual = dynamicList.Equals(linkedList);
+        bool areListsEqual = arrList.Equals(chainList);
         Console.WriteLine($"Списки {(areListsEqual ? "одинаковы" : "различны")}.");
         Console.WriteLine();
 
 
         Console.WriteLine("*** ТЕСТИРОВКА CHANGE***\n");
 
-        Console.WriteLine($"Количество изменений DynamicList: {dynamicList.ChangeCount}");
-        Console.WriteLine($"Количество изменений LinkedList: {linkedList.ChangeCount}");
+        Console.WriteLine($"Количество изменений ArrList: {arrList.ChangeCount}");
+        Console.WriteLine($"Количество изменений ChainList: {chainList.ChangeCount}");
 
         Console.WriteLine();
 
@@ -85,36 +85,36 @@ class Program
         assignedList.Add("grapefruit");
 
         Console.WriteLine("Исходный список dynamicList:");
-        dynamicList.Print();
+        arrList.Print();
         Console.WriteLine("Исходный список assignedList:");
         assignedList.Print();
 
-        dynamicList.Assign(assignedList);
+        arrList.Assign(assignedList);
 
-        Console.WriteLine("Список DynamicList после применения метода Assign:");
-        dynamicList.Print();
+        Console.WriteLine("Список ArrList после применения метода Assign:");
+        arrList.Print();
         Console.WriteLine("Список AssignedList после применения метода Assign:");
         assignedList.Print();
         Console.WriteLine();
 
         // Проверка метода AssignTo
          Console.WriteLine("*** ТЕСТИРОВКА AssignTo***\n");
-        dynamicList.Add("watermelon");
+        arrList.Add("watermelon");
         BaseList<string> assignedToList = new ArrList<string>();
 
         assignedToList.Add("grapes");
         assignedToList.Add("kiwi");
 
-        Console.WriteLine("Список DynamicList после применения метода Assign:");
-        dynamicList.Print();
+        Console.WriteLine("Список ArrList после применения метода Assign:");
+        arrList.Print();
         Console.WriteLine("Список AssignedToList после применения метода Assign:");
         assignedToList.Print();
 
-        dynamicList.AssignTo(assignedToList);
+        arrList.AssignTo(assignedToList);
         Console.WriteLine();
 
-        Console.WriteLine("Список DynamicList после применения метода AssignTo:");
-        dynamicList.Print();
+        Console.WriteLine("Список ArrList после применения метода AssignTo:");
+        arrList.Print();
         Console.WriteLine("Список AssignedToList после применения метода AssignTo:");
         assignedToList.Print();
         Console.WriteLine();
@@ -122,40 +122,107 @@ class Program
         // Тестирование методов SaveToFile и LoadFromFile
         Console.WriteLine("*** ТЕСТИРОВКА SaveToFile и LoadFromFile ***\n");
 
-        string dynamicListFile = "dynamicList.txt";
-        string linkedListFile = "linkedList.txt";
+        string dynamicListFile = "ArrList.txt";
+        string linkedListFile = "ChainList.txt";
 
-        dynamicList.SaveToFile(dynamicListFile);
-        linkedList.SaveToFile(linkedListFile);
+        arrList.SaveToFile(dynamicListFile);
+        chainList.SaveToFile(linkedListFile);
 
-        dynamicList.Clear();
-        linkedList.Clear();
+        arrList.Clear();
+        chainList.Clear();
 
-        dynamicList.LoadFromFile(dynamicListFile);
-        linkedList.LoadFromFile(linkedListFile);
+        arrList.LoadFromFile(dynamicListFile);
+        chainList.LoadFromFile(linkedListFile);
 
         Console.WriteLine("Список DynamicList после загрузки из файла:");
-        dynamicList.Print();
+        arrList.Print();
         Console.WriteLine("Список LinkedList после загрузки из файла:");
-        linkedList.Print();
+        chainList.Print();
         Console.WriteLine();
 
         // Тестирование метода ForEach
         Console.WriteLine("*** ТЕСТИРОВКА ForEach ***\n");
 
-        dynamicList.Add("apple");
-        dynamicList.Add("banana");
-        dynamicList.Add("orange");
+        arrList.Add("apple");
+        arrList.Add("banana");
+        arrList.Add("orange");
 
-        linkedList.Add("apple");
-        linkedList.Add("banana");
-        linkedList.Add("orange");
+        chainList.Add("apple");
+        chainList.Add("banana");
+        chainList.Add("orange");
 
-        dynamicList.ForEach(item => Console.WriteLine(item));
+        arrList.ForEach(item => Console.WriteLine(item));
         Console.WriteLine();
 
-        linkedList.ForEach(item => Console.WriteLine(item));
+        chainList.ForEach(item => Console.WriteLine(item));
         Console.WriteLine();
+
+        // Объединяем списки
+        Console.WriteLine("*** ТЕСТИРОВКА оператора '+' ***\n");
+        BaseList<string> mergedList = arrList + chainList;
+
+        // Выводим объединенный список
+        Console.WriteLine("Объединенный список:");
+        mergedList.Print();
+
+        Console.WriteLine("*** ТЕСТИРОВКА метода Sort() для ArrList***\n");
+        BaseList<int> numbers = new ArrList<int>();
+        numbers.Add(5);
+        numbers.Add(2);
+        numbers.Add(8);
+        numbers.Add(1);
+
+        Console.WriteLine("Исходный список чисел:");
+        numbers.Print();
+
+        numbers.Sort();
+
+        Console.WriteLine("Список чисел после сортировки:");
+        numbers.Print();
+
+        BaseList<string> strings = new ArrList<string>();
+        strings.Add("apple");
+        strings.Add("orange");
+        strings.Add("banana");
+        strings.Add("grape");
+
+        Console.WriteLine("Исходный список строк:");
+        strings.Print();
+
+        strings.Sort();
+
+        Console.WriteLine("Список строк после сортировки:");
+        strings.Print();
+
+
+        Console.WriteLine("*** ТЕСТИРОВКА метода Sort() для ChainList***\n");
+        BaseList<int> numbersList = new ChainList<int>();
+        numbersList.Add(5);
+        numbersList.Add(2);
+        numbersList.Add(8);
+        numbersList.Add(1);
+
+        Console.WriteLine("Исходный список чисел:");
+        numbersList.Print();
+
+        numbersList.Sort();
+
+        Console.WriteLine("Список чисел после сортировки:");
+        numbersList.Print();
+
+        BaseList<string> stringsList = new ChainList<string>();
+        stringsList.Add("apple");
+        stringsList.Add("orange");
+        stringsList.Add("banana");
+        stringsList.Add("grape");
+
+        Console.WriteLine("Исходный список строк:");
+        stringsList.Print();
+
+        stringsList.Sort();
+
+        Console.WriteLine("Список строк после сортировки:");
+        stringsList.Print();
 
         // Console.WriteLine("*** ВЫЗОВ МЕТОДА ТЕСТИРОВКИ ***");
         // TestPerformance();

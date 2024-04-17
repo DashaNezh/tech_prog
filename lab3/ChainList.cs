@@ -3,6 +3,7 @@ using System;
 //цепной список
 public class ChainList<T> : BaseList<T> where T : IComparable<T>
 {
+    private int CountBadIndexException = 0;
     private class Node
     {
         public T Data; //данные в узле
@@ -52,6 +53,7 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
         if (pos < 0 || pos > count)
         {
             throw new BadIndexException("Position is out of range");
+            CountBadIndexException++;
             //return; // проверка позиции
         }
 
@@ -83,6 +85,7 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
         if (pos < 0 || pos > count)
         {
             throw new BadIndexException("Position is out of range");
+            CountBadIndexException++;
             //return; //проверка позиции
         }
         if (pos == 0)
@@ -132,6 +135,7 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
             if (i < 0 || i >= count)
             {
                 throw new BadIndexException("Index is out of range");
+                CountBadIndexException++;
             }
             //начинаем с головного узла
             Node current = head;
@@ -145,6 +149,7 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
                 else
                 {
                     throw new BadIndexException("Index is out of range");
+                    CountBadIndexException++;
                     //throw new ArgumentOutOfRangeException("Index out of range");
                 }
             }
@@ -156,6 +161,7 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
             if (i < 0 || i >= count)
             {
                 throw new BadIndexException("Index is out of range");
+                CountBadIndexException++;
             }
             //начинаем с головного узла
             Node current = head;
@@ -169,6 +175,7 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
                 else
                 {
                     throw new BadIndexException("Index is out of range");
+                    CountBadIndexException++;
                     //throw new ArgumentOutOfRangeException("Index out of range");
                     //return;
                 }
@@ -181,6 +188,8 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
             else
             {
                 throw new BadIndexException("Index is out of range");
+                CountBadIndexException++;
+                
                 //throw new ArgumentOutOfRangeException("Index out of range");
                 //return;
             }
@@ -208,5 +217,37 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
         }
         clone.count = count;
         return clone;
+    }
+
+    // гномья сортировка с использованием IComparable<T>
+    public override void Sort()
+    {
+        if (head == null || head.Next == null)
+            return; // если список пуст или 1 элемент, сортировка не требуется 
+        Node current = head;
+        while (current != null) // пока не до конца
+        {
+            // проверяем, является ли текущий узел последним в списке
+            // или его значение меньше или равно значению следующего узла
+            if (current.Next == null || current.Data.CompareTo(current.Next.Data) <= 0)
+            {
+                current = current.Next; // бежим к след 
+            }
+            else
+            {
+                // если значение текущего узла больше значения следующего узла,
+                // меняем их значения местами
+                T temp = current.Data;
+                current.Data = current.Next.Data;
+                current.Next.Data = temp;
+                current = current.Next; // идем дальше
+                // если следующий узел не является головой списка,
+                // возвращаемся к началу списка для повторной проверки
+                if (current != head)
+                {
+                    current = head;
+                }
+            }
+        }
     }
 }
