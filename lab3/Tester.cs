@@ -45,16 +45,15 @@ private static int chainBadFileExceptionCount = 0;
             catch (Exception e)
             {
                 Console.WriteLine($"Ошибка: {e.Message}");
-                CountExceptions(list1, e);
-                CountExceptions(list2, e);
+                CountExceptions(list1, e); // учет исключений для arrlist
+                CountExceptions(list2, e); // учет исключений для chainlist
             }
         }
-        Console.WriteLine(list1.Count);
-        Console.WriteLine(list2.Count);
+        Console.WriteLine(list1.Count == list2.Count);
         bool testEquals = list1.Equals(list2);
         Console.WriteLine($"Списки {(testEquals ? "одинаковы" : "различны")}.");
-        Console.WriteLine($"Количетсво изменений в динамик лист: {list1.ChangeCount}");
-        Console.WriteLine($"Количество изменений в линкед лист: {list2.ChangeCount}");
+        Console.WriteLine($"Количетсво изменений в ArrList: {list1.ChangeCount}");
+        Console.WriteLine($"Количество изменений в ChainList: {list2.ChangeCount}");
 
         Console.WriteLine("Количество срабатываний исключения BadIndexException для динамического списка: " + arrBadIndexExceptionCount);
         Console.WriteLine("Количество срабатываний исключения BadFileException для динамического списка: " + arrBadFileExceptionCount);

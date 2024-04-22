@@ -225,6 +225,6 @@ class Program
         stringsList.Print();
 
         Console.WriteLine("*** ВЫЗОВ МЕТОДА ТЕСТИРОВКИ ***");
-        Tester.Test();
+        //Tester.Test();
     }
 }    
