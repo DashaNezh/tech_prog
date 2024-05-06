@@ -7,13 +7,13 @@ private static int chainBadIndexExceptionCount = 0;
 private static int chainBadFileExceptionCount = 0;
     public static void Test()
     {
-        BaseList<string> list1 = new ArrList<string>();
-        BaseList<string> list2 = new ChainList<string>();
+        BaseList<int> list1 = new ArrList<int>();
+        BaseList<int> list2 = new ChainList<int>();
 
         for (int i = 0; i < 10000; i++)
         {
-            int operation = random.Next(5); //выбор операции
-            string value = "Value" + random.Next(1000); // случ. знач.
+            int operation = random.Next(6); //выбор операции
+            int value = random.Next(1000); // случ. знач.
             int index = random.Next(1, 100); // случ. индекс
 
             try
@@ -40,6 +40,10 @@ private static int chainBadFileExceptionCount = 0;
                         list1.LoadFromFile("fileForTest.txt");
                         list2.LoadFromFile("fileForTest.txt");
                         break;
+                    case 5:
+                        list1[index] = value;
+                        list2[index] = value;
+                        break;
                 }
             }
             catch (Exception e)
@@ -55,11 +59,27 @@ private static int chainBadFileExceptionCount = 0;
         Console.WriteLine($"Количетсво изменений в ArrList: {list1.ChangeCount}");
         Console.WriteLine($"Количество изменений в ChainList: {list2.ChangeCount}");
 
-        Console.WriteLine("Количество срабатываний исключения BadIndexException для динамического списка: " + arrBadIndexExceptionCount);
-        Console.WriteLine("Количество срабатываний исключения BadFileException для динамического списка: " + arrBadFileExceptionCount);
-        Console.WriteLine("Количество срабатываний исключения BadIndexException для связанного списка: " + chainBadIndexExceptionCount);
-        Console.WriteLine("Количество срабатываний исключения BadFileException для связанного списка: " + chainBadFileExceptionCount);
-
+        Console.WriteLine($"Количество срабатываний исключения BadIndexException для динамического списка: " + arrBadIndexExceptionCount);
+        Console.WriteLine($"Количество срабатываний исключения BadFileException для динамического списка: " + arrBadFileExceptionCount);
+        Console.WriteLine($"Количество срабатываний исключения BadIndexException для связанного списка: " + chainBadIndexExceptionCount);
+        Console.WriteLine($"Количество срабатываний исключения BadFileException для связанного списка: " + chainBadFileExceptionCount);
+        Console.WriteLine();
+        Console.WriteLine($"ПРОВЕРКА arrList + chainList");
+        BaseList<int> sumArr = list1 + list2;
+        sumArr.Print();
+        Console.WriteLine($"ПРОВЕРКА chainList + arrList");
+        sumArr = list2 + list1;
+        sumArr.Print();
+        Console.WriteLine();
+        Console.WriteLine($"ПРОВЕРКА FOREACH");
+        list1.ForEach(list1);
+        list2.ForEach(list2);
+        Console.WriteLine();
+        Console.WriteLine($"ПРОВЕРКА arrList == chainList");
+        Console.WriteLine(list1 == list2);
+        Console.WriteLine($"ПРОВЕРКА arrList != chainList");
+        Console.WriteLine(list1 != list2);
+        Console.WriteLine();
         Console.WriteLine("Тестирование завершено.");
     }
     public static void CountExceptions<T>(BaseList<T> list, Exception ex) where T : IComparable<T>

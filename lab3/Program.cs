@@ -34,7 +34,7 @@ class Program
         Console.WriteLine();
 
         // Удаление элемента
-         Console.WriteLine("*** ТЕСТИРОВКА Delete***\n");
+        Console.WriteLine("*** ТЕСТИРОВКА Delete***\n");
         arrList.Delete(2);
         chainList.Delete(2);
 
@@ -98,7 +98,7 @@ class Program
         Console.WriteLine();
 
         // Проверка метода AssignTo
-         Console.WriteLine("*** ТЕСТИРОВКА AssignTo***\n");
+        Console.WriteLine("*** ТЕСТИРОВКА AssignTo***\n");
         arrList.Add("watermelon");
         BaseList<string> assignedToList = new ArrList<string>();
 
@@ -143,18 +143,21 @@ class Program
         // Тестирование метода ForEach
         Console.WriteLine("*** ТЕСТИРОВКА ForEach ***\n");
 
-        arrList.Add("apple");
-        arrList.Add("banana");
-        arrList.Add("orange");
+        BaseList<string> arrListNew = new ArrList<string>();
+        BaseList<string> chainListNew = new ChainList<string>();
 
-        chainList.Add("apple");
-        chainList.Add("banana");
-        chainList.Add("orange");
+        arrListNew .Add("apple");
+        arrListNew .Add("banana");
+        arrListNew .Add("orange");
 
-        arrList.ForEach(item => Console.WriteLine(item));
+        chainListNew.Add("apple");
+        chainListNew.Add("banana");
+        chainListNew.Add("orange");
+
+        arrListNew .ForEach(arrListNew );
         Console.WriteLine();
 
-        chainList.ForEach(item => Console.WriteLine(item));
+        chainListNew.ForEach(chainListNew);
         Console.WriteLine();
 
         // Объединяем списки
@@ -225,6 +228,6 @@ class Program
         stringsList.Print();
 
         Console.WriteLine("*** ВЫЗОВ МЕТОДА ТЕСТИРОВКИ ***");
-        //Tester.Test();
+        Tester.Test();
     }
 }    

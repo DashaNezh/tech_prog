@@ -210,11 +210,12 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
         return clone;
     }
 
-    // гномья сортировка с использованием IComparable<T>
+        // гномья сортировка с использованием IComparable<T>
     public override void Sort()
     {
         if (head == null || head.Next == null)
             return; // если список пуст или 1 элемент, сортировка не требуется 
+
         Node current = head;
         while (current != null) // пока не до конца
         {
@@ -222,7 +223,7 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
             // или его значение меньше или равно значению следующего узла
             if (current.Next == null || current.Data.CompareTo(current.Next.Data) <= 0)
             {
-                current = current.Next; // бежим к след 
+                current = current.Next; // бежим к следующему узлу
             }
             else
             {
@@ -240,5 +241,6 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
                 }
             }
         }
+        OnChange(EventArgs.Empty);
     }
 }

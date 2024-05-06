@@ -75,8 +75,26 @@
             {
                 currentCount = -1;
             }
+            public void Dispose() { }
+        }
 
-            public void Dispose() {}
+        // Метод для выполнения заданного действия над каждым элементом списка
+        public void ForEach(IEnumerable<T> items)
+        {
+            // Получаем перечислитель для объекта IEnumerable
+            IEnumerator<T> enumerator = items.GetEnumerator();
+
+            // Перебираем элементы и выполняем заданное действие над каждым
+            while (enumerator.MoveNext())
+            {
+                // Получаем текущий элемент
+                T item = enumerator.Current;
+
+                Console.WriteLine(item);
+            }
+
+            // Сбрасываем перечислитель в начало
+            enumerator.Reset();
         }
         // Событие изменения списка
 
@@ -204,8 +222,8 @@
                     }
                 }
             }
+            OnChange(EventArgs.Empty);
         }
-
         // Метод для сравнения списка с другим списком на равенство
         public bool Equals(BaseList<T> list)
         {
@@ -250,27 +268,6 @@
         {
             dest.Assign(this);
         }
-
-
-        // Метод для выполнения заданного действия над каждым элементом списка
-    public void ForEach(Action<T> action)
-    {
-        // Получаем перечислитель для списка
-        IEnumerator enumerator = GetEnumerator();
-
-        // Перебираем элементы и выполняем заданное действие над каждым
-        while (enumerator.MoveNext())
-        {
-            // Получаем текущий элемент
-            T item = (T)enumerator.Current;
-
-            // Выполняем заданное действие
-            action(item);
-        }
-
-        // Сбрасываем перечислитель в начало
-        enumerator.Reset();
-    }
         // Перегрузка оператора ==
         public static bool operator ==(BaseList<T> list1, BaseList<T> list2)
         {
