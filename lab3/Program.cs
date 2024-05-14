@@ -136,7 +136,7 @@ class Program
 
         Console.WriteLine("Список DynamicList после загрузки из файла:");
         arrList.Print();
-        Console.WriteLine("Список LinkedList после загрузки из файла:");
+        Console.WriteLine("Список ChainList после загрузки из файла:");
         chainList.Print();
         Console.WriteLine();
 

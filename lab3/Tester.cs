@@ -13,7 +13,7 @@ private static int chainBadFileExceptionCount = 0;
         for (int i = 0; i < 10000; i++)
         {
             int operation = random.Next(6); //выбор операции
-            int value = random.Next(1000); // случ. знач.
+            int value = random.Next(10000); // случ. знач.
             int index = random.Next(1, 100); // случ. индекс
 
             try
@@ -37,8 +37,8 @@ private static int chainBadFileExceptionCount = 0;
                         list2.Clear();
                         break;
                     case 4:
-                        list1.LoadFromFile("fileForTest.txt");
-                        list2.LoadFromFile("fileForTest.txt");
+                        list1.LoadFromFile("fileForTest.txt"); //несуществующий файл
+                        list2.LoadFromFile("fileForTest.txt"); //несуществующий файл
                         break;
                     case 5:
                         list1[index] = value;
@@ -53,6 +53,8 @@ private static int chainBadFileExceptionCount = 0;
                 CountExceptions(list2, e); // учет исключений для chainlist
             }
         }
+        Console.WriteLine(list1.Count);
+        Console.WriteLine(list2.Count);
         Console.WriteLine(list1.Count == list2.Count);
         bool testEquals = list1.Equals(list2);
         Console.WriteLine($"Списки {(testEquals ? "одинаковы" : "различны")}.");

@@ -71,7 +71,7 @@
                 return currentCount < list.Count;
             }
 
-            public void Reset()
+            public void Reset() 
             {
                 currentCount = -1;
             }

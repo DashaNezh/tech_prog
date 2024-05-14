@@ -210,37 +210,34 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
         return clone;
     }
 
-        // гномья сортировка с использованием IComparable<T>
+    // гномья сортировка с использованием IComparable<T>
     public override void Sort()
     {
         if (head == null || head.Next == null)
-            return; // если список пуст или 1 элемент, сортировка не требуется 
+            return; // если список пуст или содержит только один элемент, сортировка не требуется 
 
         Node current = head;
-        while (current != null) // пока не до конца
+
+
+        while (current.Next != null) // до предпоследнего элемента
         {
-            // проверяем, является ли текущий узел последним в списке
-            // или его значение меньше или равно значению следующего узла
-            if (current.Next == null || current.Data.CompareTo(current.Next.Data) <= 0)
+            if (current.Data.CompareTo(current.Next.Data) <= 0)
             {
-                current = current.Next; // бежим к следующему узлу
+                current = current.Next; // если порядок правильный, идем дальше
             }
             else
             {
-                // если значение текущего узла больше значения следующего узла,
-                // меняем их значения местами
+                // если порядок неправильный, меняем значения местами
                 T temp = current.Data;
                 current.Data = current.Next.Data;
                 current.Next.Data = temp;
-                current = current.Next; // идем дальше
-                // если следующий узел не является головой списка,
-                // возвращаемся к началу списка для повторной проверки
-                if (current != head)
-                {
-                    current = head;
-                }
+
+                // возвращаемся к началу списка после обмена
+                current = head;
             }
         }
-        OnChange(EventArgs.Empty);
+
+        OnChange(EventArgs.Empty); // уведомляем об изменении
     }
+
 }
