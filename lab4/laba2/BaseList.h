@@ -6,7 +6,7 @@ class BaseList
 protected:
     int count = 0;
     
-public:
+public: 
     virtual ~BaseList() {}
 
     int Count() const{
@@ -29,5 +29,6 @@ public:
     virtual void Sort();
 
     bool Equals(BaseList* list);
+
 };
 

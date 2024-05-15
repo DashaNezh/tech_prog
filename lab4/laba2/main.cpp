@@ -53,10 +53,11 @@ public:
                 break;
             }
         }
+        std :: cout << "Cheking assign, assignTo, equals" << std::endl;
         list1->Assign(list2);
         list1->AssignTo(list2);
         if (list1->Equals(list2)){
-            std :: cout << "Lists are the same" << std::endl;
+            std :: cout << "Very good!" << std::endl;
         }
         else{
              std :: cout << "Lists aren't the same" << std::endl;
@@ -79,6 +80,8 @@ public:
         if (listsAreEqual) {
             std::cout << "Lists are the same" << std::endl;
         }
+        delete list1;
+        delete list2;
     }
 };
 
@@ -86,6 +89,7 @@ int main() {
     std::cout << "Checking ArrList" << std::endl;
     BaseList* dynamicArray = new ArrList();
     dynamicArray->Add(1);
+    (*dynamicArray).Add(1);
     dynamicArray->Add(2);
     dynamicArray->Add(3);
     dynamicArray->Add(4);
@@ -202,5 +206,21 @@ int main() {
     std::cout << std::endl;
     Tester::Test();
 
+    std::cout << std::endl;
+
+    std::cout << "Total constructors called: " << ArrList::getConstructorCount() + ChainList::getConstructorCount() << std::endl;
+    delete dynamicArray;
+    delete newList1;
+    delete newList2;
+    delete newList3;
+    delete list;
+    delete newListChain1;
+    delete newListChain2;
+    delete newListChian3;
+    std::cout << "Total destructors called: " << ArrList::getDestructorCount() + ChainList::getDestructorCount() << std::endl;
+    
     return 0;
+    
+    // кол-во вызовов конструктора соответсвует кол-ву выхову деструктора 
+    // нужно как-то сделать так, чтобы счетчик конструкторов не учитывал создание экземпляров в методе клон
 }

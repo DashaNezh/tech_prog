@@ -1,9 +1,26 @@
 #include "ChainList.h"
 
-ChainList::ChainList() : head(nullptr) {}
+int ChainList::constructorCount = 0;
+int ChainList::destructorCount = 0;
+bool ChainList::isCloning = false;
+
+ChainList::ChainList() : head(nullptr) {
+    if (!isCloning){
+        constructorCount++; 
+    } 
+}
 
 ChainList::~ChainList() {
     Clear();
+    destructorCount++;
+}
+
+int ChainList::getConstructorCount() {
+    return constructorCount;
+}
+
+int ChainList::getDestructorCount() {
+    return destructorCount;
 }
 
 void ChainList::Add(int data) {
@@ -52,7 +69,7 @@ void ChainList::Delete(int pos) {
     count--;
 }
 
-void ChainList::Clear() {
+void ChainList::Clear() { 
     while (head != nullptr) {
         Node* temp = head;
         head = head->Next;
@@ -81,8 +98,10 @@ ChainList::Node* ChainList::NodeFind(int pos) {
 }
 
 BaseList* ChainList :: Clone() {
+    ChainList::isCloning = true; // Устанавливаем флаг клонирования
     ChainList* copy = new ChainList();
     copy->Assign(this);
+    ChainList::isCloning = false; // Сбрасываем флаг клонирования
     return copy;
 }
 

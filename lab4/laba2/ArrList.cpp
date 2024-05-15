@@ -1,12 +1,37 @@
 #include "ArrList.h"
 
-ArrList::ArrList() {
+int ArrList::constructorCount = 0;
+int ArrList::destructorCount = 0;
+bool ArrList::isCloning = false;
+
+ArrList::~ArrList()
+{
+    for (int i = 0; i < capacity; ++i) {
+        delete buf[i]; // Освобождаем память для каждого элемента массива
+    }
+    delete[] buf;
+    destructorCount++;
+}
+
+ArrList::ArrList() 
+{
+    if (!isCloning){
+        constructorCount++;
+    }
     capacity = 5;
     buf = new int*[capacity]; // Выделяем память под массив указателей
     for (int i = 0; i < capacity; ++i) {
         buf[i] = new int; // Выделяем память для каждого элемента массива
     }
     count = 0;
+}
+
+int ArrList::getConstructorCount() {
+    return constructorCount;
+}
+
+int ArrList::getDestructorCount() {
+    return destructorCount;
 }
 
 void ArrList::Add(int a) {
@@ -30,7 +55,7 @@ void ArrList::Add(int a) {
 }
 
 void ArrList::Insert(int a, int pos) {
-    if (pos < 0 || pos > count) return;
+    if (pos < 0 || pos > count) return; 
     if (count >= capacity) {
         // Увеличиваем емкость массива указателей аналогично методу Add
         int newCapacity = capacity * 2;
@@ -73,7 +98,9 @@ int& ArrList::operator[](int i) {
 }
 
 BaseList* ArrList::Clone() {
+    ArrList::isCloning = true; // Устанавливаем флаг клонирования
     ArrList* copy = new ArrList();
     copy->Assign(this);
+    ArrList::isCloning = false; // Сбрасываем флаг клонирования
     return copy;
 }

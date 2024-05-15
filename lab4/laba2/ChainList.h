@@ -24,6 +24,14 @@ public:
     virtual BaseList* Clone() override;
     void Sort() override;
 
+    static int getConstructorCount();
+    static int getDestructorCount();
+
 private:
     Node* NodeFind(int pos);
+
+    static int constructorCount;
+    static int destructorCount;
+
+    static bool isCloning;
 };
