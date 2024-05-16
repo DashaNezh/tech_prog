@@ -1,0 +1,37 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\\u0414\u0430\u0440\u044C\u044F\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\tech_prog\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{FD99791B-6830-4365-AA2D-02FCE4C6EDAE}|LabsOff\\LabsOff.csproj|c:\\users\\\u0434\u0430\u0440\u044C\u044F\\onedrive\\\u0440\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\tech_prog\\labsoff\\lab2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{FD99791B-6830-4365-AA2D-02FCE4C6EDAE}|LabsOff\\LabsOff.csproj|solutionrelative:labsoff\\lab2.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "lab2.cs",
+              "DocumentMoniker": "C:\\Users\\\u0414\u0430\u0440\u044C\u044F\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\tech_prog\\LabsOff\\lab2.cs",
+              "RelativeDocumentMoniker": "LabsOff\\lab2.cs",
+              "ToolTip": "C:\\Users\\\u0414\u0430\u0440\u044C\u044F\\OneDrive\\\u0420\u0430\u0431\u043E\u0447\u0438\u0439 \u0441\u0442\u043E\u043B\\tech_prog\\LabsOff\\lab2.cs",
+              "RelativeToolTip": "LabsOff\\lab2.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2024-05-14T18:53:43.76Z",
+              "EditorCaption": ""
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

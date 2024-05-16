@@ -14,56 +14,74 @@ public:
     void Print();
 
 private:
-    int* buf;
+    int** buf; // Массив указателей на целочисленные значения
+    int capacity;
     int count;
 };
 
 ArrList::ArrList() {
-    buf = new int[5];
+    capacity = 5;
+    buf = new int*[capacity]; // Выделяем память под массив указателей
+    for (int i = 0; i < capacity; ++i) {
+        buf[i] = new int; // Выделяем память для каждого элемента массива
+    }
     count = 0;
 }
 
 void ArrList::Add(int data) {
-    if (count >= 5) {
-        int* newBuf = new int[count * 2];
-        for (int i = 0; i < count; i++) {
-            newBuf[i] = buf[i];
+    if (count >= capacity) {
+        // Увеличиваем емкость массива указателей
+        int newCapacity = capacity * 2;
+        int** newBuf = new int*[newCapacity];
+        for (int i = 0; i < newCapacity; ++i) {
+            if (i < capacity) {
+                newBuf[i] = buf[i]; // Копируем указатели из старого буфера
+            } else {
+                newBuf[i] = new int; // Выделяем новую память для дополнительных элементов
+            }
         }
-        delete[] buf;
+        delete[] buf; // Освобождаем память для старого массива указателей
         buf = newBuf;
+        capacity = newCapacity;
     }
-    buf[count++] = data;
+    *(buf[count]) = data; // Записываем значение по адресу, хранящемуся в buf[count]
+    count++;
 }
 
 void ArrList::Insert(int data, int pos) {
     if (pos < 0 || pos > count) return;
-    if (count >= 5) {
-        int* newBuf = new int[count * 2];
-        for (int i = 0; i < count; i++) {
-            newBuf[i] = buf[i];
+    if (count >= capacity) {
+        // Увеличиваем емкость массива указателей аналогично методу Add
+        int newCapacity = capacity * 2;
+        int** newBuf = new int*[newCapacity];
+        for (int i = 0; i < newCapacity; ++i) {
+            if (i < capacity) {
+                newBuf[i] = buf[i];
+            } else {
+                newBuf[i] = new int;
+            }
         }
         delete[] buf;
         buf = newBuf;
+        capacity = newCapacity;
     }
-    for (int i = count; i > pos; i--) {
-        buf[i] = buf[i - 1];
+    for (int i = count; i > pos; --i) {
+        *(buf[i]) = *(buf[i - 1]); // Сдвигаем элементы вправо
     }
-    buf[pos] = data;
+    *(buf[pos]) = data; // Вставляем новое значение
     count++;
 }
 
 void ArrList::Delete(int pos) {
     if (pos < 0 || pos >= count) return;
-    for (int i = pos; i < count - 1; i++) {
-        buf[i] = buf[i + 1];
+    for (int i = pos; i < count - 1; ++i) {
+        *(buf[i]) = *(buf[i + 1]); // Сдвигаем элементы влево
     }
     count--;
 }
 
 void ArrList::Clear() {
-    delete[] buf;
-    buf = new int[5];
-    count = 0;
+    count = 0; // Просто обнуляем количество элементов
 }
 
 int ArrList::Count() {
@@ -71,27 +89,15 @@ int ArrList::Count() {
 }
 
 int& ArrList::operator[](int i) {
-    if (i < 0) {
-        throw std::out_of_range("Index is negative");
+    if (i < 0 || i >= count) {
+        throw std::out_of_range("Index out of range");
     }
-    if (i >= count) {
-        // Если индекс больше или равен текущему размеру,
-        // увеличиваем размер массива до i + 1
-        int newSize = i + 1;
-        int* newBuf = new int[newSize];
-        for (int j = 0; j < count; j++) {
-            newBuf[j] = buf[j];
-        }
-        delete[] buf;
-        buf = newBuf;
-        count = newSize;
-    }
-    return buf[i];
+    return *(buf[i]); // Возвращаем значение по адресу, хранящемуся в buf[i]
 }
 
 void ArrList::Print() {
-    for (int i = 0; i < count; i++) {
-        std::cout << buf[i] << " ";
+    for (int i = 0; i < count; ++i) {
+        std::cout << *(buf[i]) << " "; // Выводим значение по адресу, хранящемуся в buf[i]
     }
     std::cout << std::endl;
 }
@@ -116,13 +122,10 @@ public:
     void Clear();
     int Count();
     int& operator[](int i);
-    const int& operator[](int i) const;
     void Print();
 
 private:
-    int& Get(int i);
-    const int& Get(int i) const;
-    void Set(int i, int value);
+    Node* NodeFind(int pos); // Объявляем метод NodeFind
 };
 
 void ChainList::Add(int data) {
@@ -147,12 +150,10 @@ void ChainList::Insert(int data, int pos) {
         newNode->Next = head;
         head = newNode;
     } else {
-        Node* current = head;
-        for (int i = 0; i < pos - 1; i++) {
-            current = current->Next;
-        }
-        newNode->Next = current->Next;
-        current->Next = newNode;
+        Node* prevNode = NodeFind(pos - 1); // Используем NodeFind для нахождения предыдущего узла
+        if (prevNode == nullptr) return; // Если позиция недопустима, выходим
+        newNode->Next = prevNode->Next;
+        prevNode->Next = newNode;
     }
     count++;
 }
@@ -164,12 +165,10 @@ void ChainList::Delete(int pos) {
         head = head->Next;
         delete temp;
     } else {
-        Node* current = head;
-        for (int i = 0; i < pos - 1; i++) {
-            current = current->Next;
-        }
-        Node* temp = current->Next;
-        current->Next = current->Next->Next;
+        Node* prevNode = NodeFind(pos - 1); // Используем NodeFind для нахождения предыдущего узла
+        if (prevNode == nullptr || prevNode->Next == nullptr) return; // Если позиция недопустима, выходим
+        Node* temp = prevNode->Next;
+        prevNode->Next = temp->Next;
         delete temp;
     }
     count--;
@@ -189,71 +188,11 @@ int ChainList::Count() {
 }
 
 int& ChainList::operator[](int i) {
-    return Get(i);
-}
-
-const int& ChainList::operator[](int i) const {
-    return Get(i);
-}
-
-int& ChainList::Get(int i) {
-    if (i < 0 || i >= count) {
+    Node* node = NodeFind(i); // Используем NodeFind для нахождения узла
+    if (node == nullptr) {
         throw std::out_of_range("Index out of range");
     }
-    
-    Node* current = head;
-    for (int j = 0; j < i; j++) {
-        if (current == nullptr) {
-            throw std::runtime_error("List is corrupted");
-        }
-        current = current->Next;
-    }
-    
-    if (current == nullptr) {
-        throw std::runtime_error("List is corrupted");
-    }
-    
-    return current->Data;
-}
-
-const int& ChainList::Get(int i) const {
-    if (i < 0 || i >= count) {
-        throw std::out_of_range("Index out of range");
-    }
-    
-    const Node* current = head;
-    for (int j = 0; j < i; j++) {
-        if (current == nullptr) {
-            throw std::runtime_error("List is corrupted");
-        }
-        current = current->Next;
-    }
-    
-    if (current == nullptr) {
-        throw std::runtime_error("List is corrupted");
-    }
-    
-    return current->Data;
-}
-
-void ChainList::Set(int i, int value) {
-    if (i < 0 || i >= count) {
-        throw std::out_of_range("Index out of range");
-    }
-    
-    Node* current = head;
-    for (int j = 0; j < i; j++) {
-        if (current == nullptr) {
-            throw std::runtime_error("List is corrupted");
-        }
-        current = current->Next;
-    }
-    
-    if (current == nullptr) {
-        throw std::runtime_error("List is corrupted");
-    }
-    
-    current->Data = value;
+    return node->Data;
 }
 
 void ChainList::Print() {
@@ -263,6 +202,17 @@ void ChainList::Print() {
         current = current->Next;
     }
     std::cout << std::endl;
+}
+
+ChainList::Node* ChainList::NodeFind(int pos) {
+    if (pos >= count) return nullptr;
+    int i = 0;
+    Node* P = head;
+    while (P != nullptr && i < pos) {
+        P = P->Next;
+        i++;
+    }
+    return (i == pos) ? P : nullptr;
 }
 
 
@@ -337,13 +287,14 @@ public:
 };
 
 int main() {
+    std::cout << "Checking ArrList";
     ArrList dynamicArray;
     dynamicArray.Add(1);
     dynamicArray.Add(2);
     dynamicArray.Add(3);
     dynamicArray.Add(4);
     dynamicArray.Add(5);
-    std::cout << "After adding: ";
+    std::cout << "After add: ";
     dynamicArray.Print(); //1 2 3 4 5
     dynamicArray.Insert(9, 2);
     std::cout << "After insert: ";
@@ -368,6 +319,7 @@ int main() {
 
     std::cout << std::endl;
 
+    std::cout << "Checking ChainList";
     ChainList list;
     list.Add(1);
     list.Add(2);

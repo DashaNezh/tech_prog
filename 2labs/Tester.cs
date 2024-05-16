@@ -70,16 +70,8 @@ class Tester()
         Console.WriteLine($"Проверка на одинаковость: ");
         Console.WriteLine(list1.Count);
         Console.WriteLine(list2.Count);
-        for (int i = 0; i < list1.Count; i++)
-        {
-            if (list1[i] != list2[i])
-            {
-                Console.WriteLine($"Листы разные");
-            }
-            else
-            {
-                Console.WriteLine($"Листы одинаковые");
-            }
-        }
+        Console.WriteLine(list1.Count == list2.Count);
+        bool testEquals = list1.Equals(list2);
+        Console.WriteLine($"Списки {(testEquals ? "одинаковы" : "различны")}.");
     }  
 }

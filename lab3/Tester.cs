@@ -67,7 +67,7 @@ private static int chainBadFileExceptionCount = 0;
         Console.WriteLine($"Количество срабатываний исключения BadFileException для связанного списка: " + chainBadFileExceptionCount);
         Console.WriteLine();
         Console.WriteLine($"ПРОВЕРКА arrList + chainList");
-        BaseList<int> sumArr = list1 + list2;
+        BaseList<int> sumArr = list1 + list2; 
         sumArr.Print();
         Console.WriteLine($"ПРОВЕРКА chainList + arrList");
         sumArr = list2 + list1;

@@ -1,0 +1,15 @@
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\bin\Debug\net8.0\nadamne.exe
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\bin\Debug\net8.0\nadamne.deps.json
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\bin\Debug\net8.0\nadamne.runtimeconfig.json
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\bin\Debug\net8.0\nadamne.dll
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\bin\Debug\net8.0\nadamne.pdb
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\obj\Debug\net8.0\nadamne.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\obj\Debug\net8.0\nadamne.AssemblyInfoInputs.cache
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\obj\Debug\net8.0\nadamne.AssemblyInfo.cs
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\obj\Debug\net8.0\nadamne.csproj.CoreCompileInputs.cache
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\obj\Debug\net8.0\nadamne.sourcelink.json
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\obj\Debug\net8.0\nadamne.dll
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\obj\Debug\net8.0\refint\nadamne.dll
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\obj\Debug\net8.0\nadamne.pdb
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\obj\Debug\net8.0\nadamne.genruntimeconfig.cache
+C:\Users\Дарья\OneDrive\Рабочий стол\tech_prog\nadamne\obj\Debug\net8.0\ref\nadamne.dll

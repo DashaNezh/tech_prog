@@ -97,7 +97,7 @@ public class ArrList<T> : BaseList<T> where T : IComparable<T>
 
         set
         {
-            if (i >= count || i < 0)
+            if (i >= count || i < 0) 
             {
                 //throw new ArgumentOutOfRangeException("Element is out of range");
                 //retutn;

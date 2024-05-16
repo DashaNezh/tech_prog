@@ -166,5 +166,6 @@ class Programm
         Console.WriteLine($"ChainList");
         list2.Print();
         Console.WriteLine();
+        Tester.Test();
     }
 }

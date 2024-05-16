@@ -1,4 +1,4 @@
-public class ArrList : BaseList
+ public class ArrList : BaseList
 {
     private int[] buf; // массив для хранения элементов 
     // private int count;

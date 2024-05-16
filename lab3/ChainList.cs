@@ -10,7 +10,7 @@ public class ChainList<T> : BaseList<T> where T : IComparable<T>
 
         //конструктор для создания узла с заданными нач. условиями 
         public Node(T data)
-        {
+        { 
             Data = data;
             Next = null; //нач. условие 
         }
